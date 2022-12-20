@@ -1,0 +1,101 @@
+STATIC ROUTING (BETWEEN 2 ROUTERS)
+
+Router 1
+
+NOTE: Turn off Router 1 (2811) and add module NM-1FE2W for additional interface fastEthernet 1/0
+
+interface fastEthernet 0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+
+interface fastEthernet 0/1
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+
+interface fastEthernet 1/0
+ip address 192.168.5.1 255.255.255.0
+no shutdown
+
+
+Router 2
+
+NOTE: Turn off Router 2 (2811) and add module NM-1FE2W for additional interface fastEthernet 1/0
+
+interface fastEthernet 0/0
+ip address 192.168.3.1 255.255.255.0
+no shutdown
+
+interface fastEthernet 0/1
+ip address 192.168.4.1 255.255.255.0
+no shutdown
+
+interface fastEthernet 1/0
+ip address 192.168.5.2 255.255.255.0
+no shutdown
+
+
+Configure Static Route on Router 1
+
+ip route 192.168.3.0 255.255.255.0 192.168.5.2
+ip route 192.168.4.0 255.255.255.0 192.168.5.2
+
+Configure Static Route on Router 2
+
+ip route 192.168.1.0 255.255.255.0 192.168.5.1
+ip route 192.168.2.0 255.255.255.0 192.168.5.1
+
+Connectivity Verification: 
+
+show ip route -> displays routing table
+
+show ip interface brief ->  displays networks connected fastEthernet to ports
+
+
+
+
+
+ROUTER 1 - Routing Table
+
+C    192.168.1.0/24 is directly connected, FastEthernet0/0
+C    192.168.2.0/24 is directly connected, FastEthernet0/1
+S    192.168.3.0/24 [1/0] via 192.168.5.2
+S    192.168.4.0/24 [1/0] via 192.168.5.2
+C    192.168.5.0/24 is directly connected, FastEthernet1/0
+
+
+ROUTER 1 - network connected to fastEthernet ports
+
+Interface              IP-Address      OK? Method Status                Protocol 
+FastEthernet0/0        192.168.1.1     YES manual up                    up 
+FastEthernet0/1        192.168.2.1     YES manual up                    up 
+FastEthernet1/0        192.168.5.1     YES manual up                    up 
+
+
+
+
+
+
+ROUTER 2 - Routing Table
+
+S    192.168.1.0/24 [1/0] via 192.168.5.1
+S    192.168.2.0/24 [1/0] via 192.168.5.1
+C    192.168.3.0/24 is directly connected, FastEthernet0/0
+C    192.168.4.0/24 is directly connected, FastEthernet0/1
+C    192.168.5.0/24 is directly connected, FastEthernet1/0
+
+
+ROUTER 2 - network connected to fastEthernet ports
+
+Interface              IP-Address      OK? Method Status                Protocol 
+FastEthernet0/0        192.168.3.1     YES manual up                    up 
+FastEthernet0/1        192.168.4.1     YES manual up                    up 
+FastEthernet1/0        192.168.5.2     YES manual up                    up 
+
+
+
+
+
+
+
+
+
