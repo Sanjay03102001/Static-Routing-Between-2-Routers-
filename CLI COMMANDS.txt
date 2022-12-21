@@ -48,7 +48,7 @@ Connectivity Verification:
 
 show ip route -> displays routing table
 
-show ip interface brief ->  displays networks connected fastEthernet to ports
+show ip interface brief ->  displays networks connected to fastEthernet ports
 
 
 
