@@ -34,36 +34,39 @@ ip address 192.168.5.2 255.255.255.0
 no shutdown
 
 
+
 Configure Static Route on Router 1
 
 ip route 192.168.3.0 255.255.255.0 192.168.5.2
 ip route 192.168.4.0 255.255.255.0 192.168.5.2
+
+
 
 Configure Static Route on Router 2
 
 ip route 192.168.1.0 255.255.255.0 192.168.5.1
 ip route 192.168.2.0 255.255.255.0 192.168.5.1
 
+
+
+
 Connectivity Verification: 
 
-show ip route -> displays routing table
+show ip route static -> displays static routes found in routing table
 
-show ip interface brief ->  displays networks connected to fastEthernet ports
-
-
+show ip interface brief ->  displays networks connected to ports
 
 
 
-ROUTER 1 - Routing Table
 
-C    192.168.1.0/24 is directly connected, FastEthernet0/0
-C    192.168.2.0/24 is directly connected, FastEthernet0/1
+
+ROUTER 1 - Routing Table - Static Routes
+
 S    192.168.3.0/24 [1/0] via 192.168.5.2
 S    192.168.4.0/24 [1/0] via 192.168.5.2
-C    192.168.5.0/24 is directly connected, FastEthernet1/0
 
 
-ROUTER 1 - network connected to fastEthernet ports
+ROUTER 1 - network connected to ports
 
 Interface              IP-Address      OK? Method Status                Protocol 
 FastEthernet0/0        192.168.1.1     YES manual up                    up 
@@ -75,27 +78,15 @@ FastEthernet1/0        192.168.5.1     YES manual up                    up
 
 
 
-ROUTER 2 - Routing Table
+ROUTER 2 - Routing Table - Static Routes
 
 S    192.168.1.0/24 [1/0] via 192.168.5.1
 S    192.168.2.0/24 [1/0] via 192.168.5.1
-C    192.168.3.0/24 is directly connected, FastEthernet0/0
-C    192.168.4.0/24 is directly connected, FastEthernet0/1
-C    192.168.5.0/24 is directly connected, FastEthernet1/0
 
 
-ROUTER 2 - network connected to fastEthernet ports
+ROUTER 2 - network connected to ports
 
 Interface              IP-Address      OK? Method Status                Protocol 
 FastEthernet0/0        192.168.3.1     YES manual up                    up 
 FastEthernet0/1        192.168.4.1     YES manual up                    up 
 FastEthernet1/0        192.168.5.2     YES manual up                    up 
-
-
-
-
-
-
-
-
-
